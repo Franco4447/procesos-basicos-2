@@ -183,7 +183,6 @@ export function FlowDiagram() {
         minZoom={0.1}
         nodesDraggable={false}
         nodesConnectable={false}
-        elementsSelectable={false}
         panOnDrag={[1, 2]}
         className="bg-slate-50 [&_.react-flow__pane]:cursor-default"
         proOptions={{ hideAttribution: true }}

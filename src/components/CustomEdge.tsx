@@ -33,11 +33,11 @@ export function CustomEdge({
       <path
         d={edgePath}
         fill="none"
-        strokeOpacity={0}
+        stroke="transparent"
         strokeWidth={30}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="react-flow__edge-interaction cursor-pointer"
+        style={{ pointerEvents: 'all', cursor: 'help' }}
       />
 
       {/* Tooltip rendered safely via EdgeLabelRenderer (teleports out of SVG context) */}

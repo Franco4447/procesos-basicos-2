@@ -1,6 +1,7 @@
 import { Handle, Position } from '@xyflow/react';
 import clsx from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { useState } from 'react';
 
 function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));
@@ -8,6 +9,7 @@ function cn(...inputs: (string | undefined | null | false)[]) {
 
 export function CustomNode({ data, isConnectable }: any) {
   const { label, category, hideHandles, function: nodeFunction, deficit: nodeDeficit } = data;
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleClasses = "opacity-0";
 
@@ -44,18 +46,18 @@ export function CustomNode({ data, isConnectable }: any) {
   );
 
   const renderTooltip = () => (
-    (nodeFunction || nodeDeficit) ? (
-      <div className="absolute z-50 left-full ml-4 top-0 min-w-[250px] max-w-[300px] p-3 rounded-lg shadow-xl border bg-white opacity-0 group-hover/node:opacity-100 transition-opacity duration-200 pointer-events-none hidden group-hover/node:block text-left text-sm">
-        <div className="absolute right-full top-4 border-r-8 border-r-white border-y-8 border-y-transparent w-0 h-0" style={{ transform: 'translateX(1px)' }}></div>
+    (isHovered && (nodeFunction || nodeDeficit)) ? (
+      <div className="absolute z-[1000] left-[105%] top-1/2 -translate-y-1/2 min-w-[280px] p-4 rounded-xl shadow-2xl border border-slate-200 bg-white text-left text-sm pointer-events-none">
+        <div className="absolute right-full top-1/2 -translate-y-1/2 border-r-[10px] border-r-white border-y-[10px] border-y-transparent w-0 h-0" style={{ transform: 'translateX(1px)' }}></div>
         {nodeFunction && (
           <div className="mb-2">
-            <span className="font-bold text-slate-800 block text-xs uppercase tracking-wide">Función / Capacidad</span>
+            <span className="font-bold text-slate-800 block text-[11px] uppercase tracking-wide mb-1">Función / Capacidad</span>
             <p className="text-slate-600 mt-1 font-normal leading-snug">{nodeFunction}</p>
           </div>
         )}
         {nodeDeficit && (
-          <div>
-            <span className="font-bold text-red-600 block text-xs uppercase tracking-wide">Déficit / Patología</span>
+          <div className="mt-3">
+            <span className="font-bold text-red-600 block text-[11px] uppercase tracking-wide mb-1">Déficit / Patología</span>
             <p className="text-red-500 mt-1 font-normal leading-snug">{nodeDeficit}</p>
           </div>
         )}
@@ -65,7 +67,11 @@ export function CustomNode({ data, isConnectable }: any) {
 
   if (category === 'io') {
     return (
-      <div className="px-4 py-2 font-bold text-slate-600 border-2 border-slate-300 text-center text-sm md:text-base uppercase tracking-widest bg-white shadow-sm rounded-lg relative w-[180px] z-10 group/node">
+      <div 
+        className="px-4 py-2 font-bold text-slate-600 border-2 border-slate-300 text-center text-sm md:text-base uppercase tracking-widest bg-white shadow-sm rounded-lg relative w-[180px] cursor-help"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         {renderHandles()}
         {label}
         {renderTooltip()}
@@ -73,7 +79,7 @@ export function CustomNode({ data, isConnectable }: any) {
     );
   }
 
-  const baseClasses = "w-[180px] min-h-[80px] p-4 text-center text-[14px] font-semibold z-10 relative rounded-[8px] border-2 flex flex-col justify-center items-center transition-all duration-200 group/node";
+  const baseClasses = "w-[180px] min-h-[80px] p-4 text-center text-[14px] font-semibold relative rounded-[8px] border-2 flex flex-col justify-center items-center transition-all duration-200 cursor-help";
   let categoryClasses = "";
   
   if (category === 'input-process') {
@@ -90,7 +96,11 @@ export function CustomNode({ data, isConnectable }: any) {
   }
 
   return (
-    <div className={cn(baseClasses, categoryClasses)}>
+    <div 
+      className={cn(baseClasses, categoryClasses)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {renderHandles()}
       {label.split('\n').map((line: string, i: number) => (
         <span key={i} className="block whitespace-nowrap">{line}</span>
