@@ -100,12 +100,15 @@ const initialEdges = [
   { id: 'e3-10', source: '3', target: '10', type: 'straight', zIndex: 50, sourceHandle: 's-bottom-left', targetHandle: 't-top-left', markerEnd: markerOpt, style: dashedEdgeStyle },
   
   // G5 -> C9 (Léxico visual -> Léxico fonológico) 
-  { id: 'e8-10', source: '8', target: '10', type: 'straight', zIndex: 50, sourceHandle: 's-bottom-center', targetHandle: 't-top-right', markerEnd: markerOpt, style: dashedEdgeStyle },
+  { id: 'e8-10', source: '8', target: '10', type: 'straight', zIndex: 50, sourceHandle: 's-bottom-left', targetHandle: 't-top-right', markerEnd: markerOpt, style: dashedEdgeStyle },
+  
+  // G5 -> G9 (Léxico visual -> Léxico ortográfico) 
+  { id: 'e8-11', source: '8', target: '11', type: 'straight', zIndex: 50, sourceHandle: 's-bottom-right', targetHandle: 't-top-right', markerEnd: markerOpt, style: dashedEdgeStyle },
   
   // E6 -> C9 (Diagonal)
   { id: 'e5-10', source: '5', target: '10', type: 'straight', zIndex: 50, sourceHandle: 's-bottom-left', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle },
   // E6 -> G9 (Diagonal)
-  { id: 'e5-11', source: '5', target: '11', type: 'straight', zIndex: 50, sourceHandle: 's-bottom-right', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle },
+  { id: 'e5-11', source: '5', target: '11', type: 'straight', zIndex: 50, sourceHandle: 's-bottom-right', targetHandle: 't-top-left', markerEnd: markerOpt, style: edgeStyle },
   
   // C9 -> G9 (Horizontal)
   { id: 'e10-11', source: '10', target: '11', type: 'straight', zIndex: 50, sourceHandle: 's-right-middle', targetHandle: 't-left-middle', markerEnd: markerOpt, style: edgeStyle },
