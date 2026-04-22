@@ -184,7 +184,8 @@ export function FlowDiagram() {
         nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable={false}
-        className="bg-slate-50"
+        panOnDrag={[1, 2]}
+        className="bg-slate-50 [&_.react-flow__pane]:cursor-default"
         proOptions={{ hideAttribution: true }}
       >
         <Background color="#cbd5e1" gap={20} size={1} />
