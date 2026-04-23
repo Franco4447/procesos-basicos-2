@@ -15,6 +15,7 @@ export function CustomEdge({
   style,
   markerEnd,
   data,
+  selected,
 }: EdgeProps) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -41,10 +42,10 @@ export function CustomEdge({
       />
 
       {/* Tooltip rendered safely via EdgeLabelRenderer (teleports out of SVG context) */}
-      {(isHovered && data && (data.function || data.deficit)) && (
+      {((isHovered || selected) && data && (data.function || data.deficit)) && (
         <EdgeLabelRenderer>
           <div
-            className="absolute rounded-md shadow-lg border border-slate-300 bg-white p-3 text-sm z-50 transition-opacity pointer-events-none"
+            className="absolute rounded-xl shadow-2xl border border-slate-300 bg-white p-4 text-sm z-[1500] transition-opacity pointer-events-none"
             style={{
               transform: `translate(-50%, -50%)`,
               left: labelX,

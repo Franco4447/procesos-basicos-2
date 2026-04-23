@@ -7,7 +7,7 @@ function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));
 }
 
-export function CustomNode({ data, isConnectable }: any) {
+export function CustomNode({ data, isConnectable, selected }: any) {
   const { label, category, hideHandles, function: nodeFunction, deficit: nodeDeficit } = data;
   const [isHovered, setIsHovered] = useState(false);
 
@@ -46,7 +46,7 @@ export function CustomNode({ data, isConnectable }: any) {
   );
 
   const renderTooltip = () => (
-    (isHovered && (nodeFunction || nodeDeficit)) ? (
+    ((isHovered || selected) && (nodeFunction || nodeDeficit)) ? (
       <div className="absolute z-[1000] left-[105%] top-1/2 -translate-y-1/2 min-w-[280px] p-4 rounded-xl shadow-2xl border border-slate-200 bg-white text-left text-sm pointer-events-none">
         <div className="absolute right-full top-1/2 -translate-y-1/2 border-r-[10px] border-r-white border-y-[10px] border-y-transparent w-0 h-0" style={{ transform: 'translateX(1px)' }}></div>
         {nodeFunction && (

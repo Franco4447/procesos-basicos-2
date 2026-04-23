@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+.react-flow__node:hover {
+  z-index: 9999 !important;
+}
+
+.react-flow__node.selected {
+  z-index: 9999 !important;
+}

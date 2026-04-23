@@ -80,64 +80,64 @@ const convEdgeStyle = { stroke: '#d946ef', strokeWidth: 2.5, strokeDasharray: '6
 
 const initialEdges = [
   // A1 -> A3 (Vertical)
-  { id: 'e1-2', source: '1', target: '2', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle },
+  { id: 'e1-2', source: '1', target: '2', type: 'custom', sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle },
   // I1 -> I3 (Vertical)
-  { id: 'e6-7', source: '6', target: '7', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle },
+  { id: 'e6-7', source: '6', target: '7', type: 'custom', sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle },
   
   // A3 -> C5 (Diagonal)
-  { id: 'e2-3', source: '2', target: '3', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-right', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Se contrastan los fonemas analizados con el inventario de palabras disponibles en el sistema.' } },
+  { id: 'e2-3', source: '2', target: '3', type: 'custom', sourceHandle: 's-bottom-right', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Se contrastan los fonemas analizados con el inventario de palabras disponibles en el sistema.' } },
   // I3 -> G5 (Diagonal)
-  { id: 'e7-8', source: '7', target: '8', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-left', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Busca coincidencias totales de letras de una fijación ocular o secuenciales contra el léxico ortográfico.' } },
+  { id: 'e7-8', source: '7', target: '8', type: 'custom', sourceHandle: 's-bottom-left', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Busca coincidencias totales de letras de una fijación ocular o secuenciales contra el léxico ortográfico.' } },
   
   // A3 -> A7 (Vertical)
-  { id: 'e2-4', source: '2', target: '4', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-left', targetHandle: 't-top-left', markerEnd: markerConvOpt, style: convEdgeStyle, data: { function: 'Redirección sublexical a la vía de ensamble segmentario, evadiendo cualquier verificación del sistema central frente a estímulos y pseudopalabras irreconocibles.' } },
+  { id: 'e2-4', source: '2', target: '4', type: 'custom', sourceHandle: 's-bottom-left', targetHandle: 't-top-left', markerEnd: markerConvOpt, style: convEdgeStyle, data: { function: 'Redirección sublexical a la vía de ensamble segmentario, evadiendo cualquier verificación del sistema central frente a estímulos y pseudopalabras irreconocibles.' } },
   // I3 -> H7 (Diagonal) 
-  { id: 'e7-9', source: '7', target: '9', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerConvOpt, style: convEdgeStyle, data: { function: 'Apertura de la vía indirecta lectora. Petición del paso a paso letra a sonido sin un patrón lexicográfico preestablecido.' } },
+  { id: 'e7-9', source: '7', target: '9', type: 'custom', sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerConvOpt, style: convEdgeStyle, data: { function: 'Apertura de la vía indirecta lectora. Petición del paso a paso letra a sonido sin un patrón lexicográfico preestablecido.' } },
   // I3 -> I11 (Vertical / Direct visual route)
-  { id: 'e7-14', source: '7', target: '14', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-right', targetHandle: 't-top-right', markerEnd: markerOpt, style: dashedEdgeStyle, data: { function: 'Copia pura esclava o dibujo literal sin procesamiento adicional intermedio de los grafemas detectados al papel.' } },
+  { id: 'e7-14', source: '7', target: '14', type: 'custom', sourceHandle: 's-bottom-right', targetHandle: 't-top-right', markerEnd: markerOpt, style: dashedEdgeStyle, data: { function: 'Copia pura esclava o dibujo literal sin procesamiento adicional intermedio de los grafemas detectados al papel.' } },
   
   // C5 -> E6 (Diagonal)
-  { id: 'e3-5', source: '3', target: '5', type: 'custom', zIndex: 50, sourceHandle: 's-right-middle', targetHandle: 't-top-left', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Acreditado el reconocimiento oral, se envía la firma lingüística abstracta a encajar y unirse con el concepto correspondiente.' } },
+  { id: 'e3-5', source: '3', target: '5', type: 'custom', sourceHandle: 's-right-middle', targetHandle: 't-top-left', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Acreditado el reconocimiento oral, se envía la firma lingüística abstracta a encajar y unirse con el concepto correspondiente.' } },
   // G5 -> E6 (Diagonal)
-  { id: 'e8-5', source: '8', target: '5', type: 'custom', zIndex: 50, sourceHandle: 's-left-middle', targetHandle: 't-top-right', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Una vez vista la "silueta" global de una palabra normal dentro del léxico, se dispara automática e instantáneamente su significado interrelacionado.' } },
+  { id: 'e8-5', source: '8', target: '5', type: 'custom', sourceHandle: 's-left-middle', targetHandle: 't-top-right', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Una vez vista la "silueta" global de una palabra normal dentro del léxico, se dispara automática e instantáneamente su significado interrelacionado.' } },
   
   // C5 -> C9 (Vertical)
-  { id: 'e3-10', source: '3', target: '10', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-left', targetHandle: 't-top-left', markerEnd: markerOpt, style: dashedEdgeStyle, data: { function: 'Repetición directa asemántica. Vía puente que repite tal cual las cadenas fonológicas ya conocidas repulsando la interferencia cognitiva.' } },
+  { id: 'e3-10', source: '3', target: '10', type: 'custom', sourceHandle: 's-bottom-left', targetHandle: 't-top-left', markerEnd: markerOpt, style: dashedEdgeStyle, data: { function: 'Repetición directa asemántica. Vía puente que repite tal cual las cadenas fonológicas ya conocidas repulsando la interferencia cognitiva.' } },
   
   // G5 -> C9 (Léxico visual -> Léxico fonológico) 
-  { id: 'e8-10', source: '8', target: '10', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-left', targetHandle: 't-top-right', markerEnd: markerOpt, style: dashedEdgeStyle, data: { function: 'Ruta léxica asemántica (o directa residual). Facilita leer palabras correctas en voz alta sin comprenderlas (frecuente en pacientes dementes fluidos).' } },
+  { id: 'e8-10', source: '8', target: '10', type: 'custom', sourceHandle: 's-bottom-left', targetHandle: 't-top-right', markerEnd: markerOpt, style: dashedEdgeStyle, data: { function: 'Ruta léxica asemántica (o directa residual). Facilita leer palabras correctas en voz alta sin comprenderlas (frecuente en pacientes dementes fluidos).' } },
   
   // G5 -> G9 (Léxico visual -> Léxico ortográfico) 
-  { id: 'e8-11', source: '8', target: '11', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-right', targetHandle: 't-top-right', markerEnd: markerOpt, style: dashedEdgeStyle, data: { function: 'Enlace exclusivo que propicia la copia ultrarrápida al léxico manuscrito por bypass de un texto, o sea, ver y transcribir globalmente ignorando las vías comprensivas superiores.' } },
+  { id: 'e8-11', source: '8', target: '11', type: 'custom', sourceHandle: 's-bottom-right', targetHandle: 't-top-right', markerEnd: markerOpt, style: dashedEdgeStyle, data: { function: 'Enlace exclusivo que propicia la copia ultrarrápida al léxico manuscrito por bypass de un texto, o sea, ver y transcribir globalmente ignorando las vías comprensivas superiores.' } },
   
   // E6 -> C9 (Diagonal)
-  { id: 'e5-10', source: '5', target: '10', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-left', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { function: 'El concepto en mente localiza direccionalidades topográficas y morfológicas hacia su par lingüístico-vocal para formular la respuesta verbal en el cerebro o "habla interna".' } },
+  { id: 'e5-10', source: '5', target: '10', type: 'custom', sourceHandle: 's-bottom-left', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { function: 'El concepto en mente localiza direccionalidades topográficas y morfológicas hacia su par lingüístico-vocal para formular la respuesta verbal en el cerebro o "habla interna".' } },
   // E6 -> G9 (Diagonal)
-  { id: 'e5-11', source: '5', target: '11', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-right', targetHandle: 't-top-left', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Al pensar algo, el contenido semántico emite su solicitud de despliegue sobre su par lexical ortográfico para obtener las secuencias grafémicas de lo que se desea inscribir.' } },
+  { id: 'e5-11', source: '5', target: '11', type: 'custom', sourceHandle: 's-bottom-right', targetHandle: 't-top-left', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Al pensar algo, el contenido semántico emite su solicitud de despliegue sobre su par lexical ortográfico para obtener las secuencias grafémicas de lo que se desea inscribir.' } },
   
   // C9 -> G9 (Horizontal)
-  { id: 'e10-11', source: '10', target: '11', type: 'custom', zIndex: 50, sourceHandle: 's-right-middle', targetHandle: 't-left-middle', markerEnd: markerOpt, style: edgeStyle },
+  { id: 'e10-11', source: '10', target: '11', type: 'custom', sourceHandle: 's-right-middle', targetHandle: 't-left-middle', markerEnd: markerOpt, style: edgeStyle },
   
   // C9 -> A11 (Diagonal)
-  { id: 'e10-12', source: '10', target: '12', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Inmediata transición del cúmulo léxico general y fonémico hacia el contenedor secuencial.' } },
+  { id: 'e10-12', source: '10', target: '12', type: 'custom', sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Inmediata transición del cúmulo léxico general y fonémico hacia el contenedor secuencial.' } },
   // G9 -> I14 (Diagonal)
-  { id: 'e11-14', source: '11', target: '14', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-center', targetHandle: 't-top-left', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Traspaso postlexical que destina en la unidad de retención grafémica la formación abstracta y exacta seleccionada para las instrucciones neuromusculares.' } },
+  { id: 'e11-14', source: '11', target: '14', type: 'custom', sourceHandle: 's-bottom-center', targetHandle: 't-top-left', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Traspaso postlexical que destina en la unidad de retención grafémica la formación abstracta y exacta seleccionada para las instrucciones neuromusculares.' } },
   
   // A7 -> A12 (Vertical)
-  { id: 'e4-12', source: '4', target: '12', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-left', targetHandle: 't-top-left', markerEnd: markerConvOpt, style: convEdgeStyle, data: { function: 'Entrega en el almacén repeticional de los fonemas "fríos" del dictado/eco de la pseudopalabra que ha analizado la regla acústico-fonológica.' } },
+  { id: 'e4-12', source: '4', target: '12', type: 'custom', sourceHandle: 's-bottom-left', targetHandle: 't-top-left', markerEnd: markerConvOpt, style: convEdgeStyle, data: { function: 'Entrega en el almacén repeticional de los fonemas "fríos" del dictado/eco de la pseudopalabra que ha analizado la regla acústico-fonológica.' } },
   
   // H9 -> A12 (Conversión grafema-fonema -> Almacén de fonemas)
-  { id: 'e9-12', source: '9', target: '12', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-center', targetHandle: 't-top-right', markerEnd: markerConvOpt, style: convEdgeStyle, data: { function: 'Emisión continua y trabajosa que llena el almacén desde un sistema de reconocimiento letreado a sonoro silábico en decodificación.' } },
+  { id: 'e9-12', source: '9', target: '12', type: 'custom', sourceHandle: 's-bottom-center', targetHandle: 't-top-right', markerEnd: markerConvOpt, style: convEdgeStyle, data: { function: 'Emisión continua y trabajosa que llena el almacén desde un sistema de reconocimiento letreado a sonoro silábico en decodificación.' } },
   
   // A12 -> E13 (Horizontal)
-  { id: 'e12-13', source: '12', target: '13', type: 'custom', zIndex: 50, sourceHandle: 's-right-middle', targetHandle: 't-left-middle', markerEnd: markerConvOpt, style: convEdgeStyle, data: { function: 'Desde el retén fonológico en estado temporal de repaso (loop), se envía lo envasado a acoplarse y mapearse a signos normados de transcripción escrita visual.' } },
+  { id: 'e12-13', source: '12', target: '13', type: 'custom', sourceHandle: 's-right-middle', targetHandle: 't-left-middle', markerEnd: markerConvOpt, style: convEdgeStyle, data: { function: 'Desde el retén fonológico en estado temporal de repaso (loop), se envía lo envasado a acoplarse y mapearse a signos normados de transcripción escrita visual.' } },
   // E13 -> I14 (Horizontal)
-  { id: 'e13-14', source: '13', target: '14', type: 'custom', zIndex: 50, sourceHandle: 's-right-middle', targetHandle: 't-left-middle', markerEnd: markerConvOpt, style: convEdgeStyle, data: { function: 'Impacta el resultado del traspaso metódico desde sonidos sueltos hacia representaciones grafémicas en espera listas para escribir o tipear.' } },
+  { id: 'e13-14', source: '13', target: '14', type: 'custom', sourceHandle: 's-right-middle', targetHandle: 't-left-middle', markerEnd: markerConvOpt, style: convEdgeStyle, data: { function: 'Impacta el resultado del traspaso metódico desde sonidos sueltos hacia representaciones grafémicas en espera listas para escribir o tipear.' } },
   
   // A12 -> A15 (Vertical)
-  { id: 'e12-15', source: '12', target: '15', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Inicia los programas neuro-motores, transformando patrones en órdenes para los articuladores orofaciales (Habla).' } },
+  { id: 'e12-15', source: '12', target: '15', type: 'custom', sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Inicia los programas neuro-motores, transformando patrones en órdenes para los articuladores orofaciales (Habla).' } },
   // I14 -> I16 (Vertical)
-  { id: 'e14-16', source: '14', target: '16', type: 'custom', zIndex: 50, sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Inicia comandos quinestésticos en las habilidades manuales finas. Ordena los tiempos inter-patrones desde el cerebro al papel o teclado.' } },
+  { id: 'e14-16', source: '14', target: '16', type: 'custom', sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { function: 'Inicia comandos quinestésticos en las habilidades manuales finas. Ordena los tiempos inter-patrones desde el cerebro al papel o teclado.' } },
   
   // Auditory feedback loop
   { 
@@ -145,7 +145,6 @@ const initialEdges = [
     source: '15', 
     target: '1', 
     type: 'step', 
-    zIndex: 50,
     sourceHandle: 's-left-middle', 
     targetHandle: 't-left-middle', 
     markerEnd: { ...markerOpt, color: '#cbd5e1' }, 
@@ -157,7 +156,6 @@ const initialEdges = [
     source: '16', 
     target: '6', 
     type: 'step', 
-    zIndex: 50,
     sourceHandle: 's-right-middle', 
     targetHandle: 't-right-middle', 
     markerEnd: { ...markerOpt, color: '#cbd5e1' }, 
