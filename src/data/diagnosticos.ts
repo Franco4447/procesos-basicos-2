@@ -91,7 +91,42 @@ initialEdges.forEach((edge: any) => {
   }
 });
 
-export const DIAGNOSTICOS: DiagnosisDef[] = Array.from(allDiagnosesMap.values()).sort((a,b) => a.name.localeCompare(b.name));
+const getComponentScore = (id: string, isNode: boolean): number => {
+  if (isNode) {
+    const node = initialNodes.find((n: any) => n.id === id);
+    return node ? node.position.y : 9999;
+  } else {
+    const edge = initialEdges.find((e: any) => e.id === id);
+    if (edge) {
+      const sourceNode = initialNodes.find((n: any) => n.id === edge.source);
+      const targetNode = initialNodes.find((n: any) => n.id === edge.target);
+      const sourceY = sourceNode ? sourceNode.position.y : 9999;
+      const targetY = targetNode ? targetNode.position.y : 9999;
+      return (sourceY + targetY) / 2;
+    }
+    return 9999;
+  }
+};
+
+const getDiagnosisScore = (diag: DiagnosisDef): number => {
+  let minScore = 9999;
+  diag.nodes.forEach(nodeId => {
+    minScore = Math.min(minScore, getComponentScore(nodeId, true));
+  });
+  diag.edges.forEach(edgeId => {
+    minScore = Math.min(minScore, getComponentScore(edgeId, false));
+  });
+  return minScore;
+};
+
+export const DIAGNOSTICOS: DiagnosisDef[] = Array.from(allDiagnosesMap.values()).sort((a,b) => {
+  const scoreA = getDiagnosisScore(a);
+  const scoreB = getDiagnosisScore(b);
+  if (scoreA !== scoreB) {
+    return scoreA - scoreB;
+  }
+  return a.name.localeCompare(b.name);
+});
 
 export const DIAGNOSTICOS_AGRUPADOS = DIAGNOSTICOS.reduce((acc, diag) => {
   if (!acc[diag.category]) {
