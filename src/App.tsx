@@ -59,7 +59,7 @@ export default function App() {
                   initial={{ scale: 0.95, opacity: 0, y: 20 }}
                   animate={{ scale: 1, opacity: 1, y: 0 }}
                   exit={{ scale: 0.95, opacity: 0, y: 20 }}
-                  className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full p-8 relative overflow-hidden flex flex-col max-h-[90vh]"
+                  className="bg-white rounded-2xl shadow-2xl max-w-xl w-full p-6 relative overflow-hidden flex flex-col max-h-[90vh]"
                 >
                   <button
                     onClick={() => setShowOnboarding(false)}
@@ -68,60 +68,60 @@ export default function App() {
                     <X size={24} />
                   </button>
                   
-                  <div className="mb-6 border-b border-slate-100 pb-6 pr-8">
-                    <h2 className="text-3xl font-bold text-slate-800 tracking-tight leading-tight">
+                  <div className="mb-5 border-b border-slate-100 pb-5 pr-8">
+                    <h2 className="text-2xl font-bold text-slate-800 tracking-tight leading-tight">
                       Modelo Cognitivo del Lenguaje
                     </h2>
-                    <p className="text-slate-500 mt-2 text-lg">
+                    <p className="text-slate-500 mt-1.5 text-sm">
                       Basado en los esquemas de procesamiento léxico de Ellis & Young (1988) y Patterson & Shewell (1987).
                     </p>
                   </div>
                   
-                  <div className="overflow-y-auto pr-2 space-y-6">
-                    <p className="text-lg text-slate-700 leading-relaxed">
+                  <div className="overflow-y-auto pr-2 space-y-5">
+                    <p className="text-base text-slate-700 leading-relaxed">
                       Este diagrama interactivo permite explorar las rutas mentales subyacentes a la lectura, escritura, comprensión y habla, así como las patologías (p.ej. afasias, dislexias) originadas por el daño en los diferentes módulos.
                     </p>
                     
-                    <div className="grid gap-4">
+                    <div className="grid gap-3">
                       <div className="flex gap-4 items-start p-4 bg-blue-50/50 rounded-xl border border-blue-100">
-                        <div className="p-3 bg-blue-100 text-blue-600 rounded-lg shrink-0">
-                          <MousePointer2 size={24} />
+                        <div className="p-2.5 bg-blue-100 text-blue-600 rounded-lg shrink-0">
+                          <MousePointer2 size={20} />
                         </div>
                         <div>
-                          <h4 className="font-bold text-slate-800 text-lg">Resaltado de Rutas</h4>
-                          <p className="text-slate-600">Sitúa el cursor sobre cualquier módulo para iluminar instantáneamente las vías de procesamiento involucradas hacia atrás y hacia delante.</p>
+                          <h4 className="font-bold text-slate-800 text-base">Resaltado de Rutas</h4>
+                          <p className="text-slate-600 text-sm mt-0.5 leading-relaxed">Sitúa el cursor sobre cualquier módulo para iluminar instantáneamente las vías de procesamiento involucradas hacia atrás y hacia delante.</p>
                         </div>
                       </div>
                       
                       <div className="flex gap-4 items-start p-4 bg-amber-50/50 rounded-xl border border-amber-100">
-                        <div className="p-3 bg-amber-100 text-amber-600 rounded-lg shrink-0">
-                          <BookOpen size={24} />
+                        <div className="p-2.5 bg-amber-100 text-amber-600 rounded-lg shrink-0">
+                          <BookOpen size={20} />
                         </div>
                         <div>
-                          <h4 className="font-bold text-slate-800 text-lg">Exploración Clínica</h4>
-                          <p className="text-slate-600">Haz clic en <strong>"+ Info"</strong> de cualquier módulo para abrir el panel con su descripción neurocognitiva sistemática y su patología asociada.</p>
+                          <h4 className="font-bold text-slate-800 text-base">Exploración Clínica</h4>
+                          <p className="text-slate-600 text-sm mt-0.5 leading-relaxed">Haz clic en <strong>"+ Info"</strong> o "Más información" de cualquier módulo para abrir el panel con su descripción neurocognitiva sistemática y patología asociada.</p>
                         </div>
                       </div>
 
                       <div className="flex gap-4 items-start p-4 bg-emerald-50/50 rounded-xl border border-emerald-100">
-                        <div className="p-3 bg-emerald-100 text-emerald-600 rounded-lg shrink-0">
-                          <Navigation size={24} />
+                        <div className="p-2.5 bg-emerald-100 text-emerald-600 rounded-lg shrink-0">
+                          <Navigation size={20} />
                         </div>
                         <div>
-                          <h4 className="font-bold text-slate-800 text-lg">Navegación</h4>
-                          <p className="text-slate-600">Utiliza la rueda del ratón para hacer zoom, arrastra para moverte por el lienzo, o ayúdate del mapa de la esquina inferior derecha.</p>
+                          <h4 className="font-bold text-slate-800 text-base">Navegación</h4>
+                          <p className="text-slate-600 text-sm mt-0.5 leading-relaxed">Utiliza la rueda del ratón para hacer zoom, arrastra para moverte por el lienzo, o ayúdate del mapa de la esquina inferior derecha.</p>
                         </div>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="mt-8 pt-6 border-t border-slate-100 flex justify-end">
+                  <div className="mt-6 pt-5 border-t border-slate-100 flex justify-end">
                     <button 
                       onClick={() => setShowOnboarding(false)}
-                      className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold shadow-lg shadow-blue-600/20 transition-all active:scale-95"
+                      className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl font-semibold shadow-md shadow-blue-600/20 transition-all active:scale-95 text-sm"
                     >
                       <span>Empezar a explorar</span>
-                      <Play size={20} className="fill-current" />
+                      <Play size={16} className="fill-current" />
                     </button>
                   </div>
                 </motion.div>
