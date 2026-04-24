@@ -11,9 +11,16 @@ function cn(...inputs: (string | undefined | null | false)[]) {
 }
 
 export function CustomNode({ data, isConnectable, selected }: any) {
-  const { label, category, hideHandles, extendedFunction, extendedDeficit } = data;
+  const { label, category, hideHandles, extendedFunction, extendedDeficit, expandedDetails, isDamaged } = data;
   const [isHovered, setIsHovered] = useState(false);
   const showInfo = useInfo();
+  
+  // ... Handle damaged rendering classes ...
+  let damagedClasses = isDamaged 
+    ? "ring-4 ring-offset-2 ring-red-500 shadow-[0_0_20px_rgba(239,68,68,0.7)] animate-[pulse_2s_ease-in-out_infinite] border-red-500 !bg-red-50"
+    : "";
+
+  const deficitData = expandedDetails?.deficit || extendedDeficit;
 
   const handleClasses = "opacity-0";
 
@@ -50,7 +57,7 @@ export function CustomNode({ data, isConnectable, selected }: any) {
   );
 
   const renderTooltip = () => {
-    if (!extendedFunction && !extendedDeficit) return null;
+    if (!extendedFunction && !deficitData) return null;
 
     return (
       <div 
@@ -66,7 +73,7 @@ export function CustomNode({ data, isConnectable, selected }: any) {
         <div className="absolute right-full top-1/2 -translate-y-1/2 border-r-[10px] border-r-white border-y-[10px] border-y-transparent w-0 h-0" style={{ transform: 'translateX(1px)' }}></div>
         
         {extendedFunction && (
-          <div className={extendedDeficit ? "mb-3" : "mb-2"}>
+          <div className={deficitData ? "mb-3" : "mb-2"}>
             <span className="font-bold text-slate-800 block text-[11px] uppercase tracking-wide mb-1">Función / Capacidad</span>
             <ul className="list-disc pl-4 text-slate-600 mt-1 font-normal leading-snug space-y-1">
               {Array.isArray(extendedFunction) ? extendedFunction.map((item: string, i: number) => (
@@ -76,24 +83,31 @@ export function CustomNode({ data, isConnectable, selected }: any) {
           </div>
         )}
 
-        {extendedDeficit && (
+        {deficitData && (
           <div className="mt-3">
             <span className="font-bold text-red-600 block text-[11px] uppercase tracking-wide mb-1">Déficit / Patología</span>
             <div className="text-red-500 mt-1 font-normal leading-snug text-xs space-y-1">
-              {extendedDeficit.diagnosis && <p className="font-bold mb-1 text-red-600">{extendedDeficit.diagnosis}</p>}
-              {extendedDeficit.deficits ? (
+              {deficitData.diagnosis && (
+                Array.isArray(deficitData.diagnosis) ? (
+                  <ul className="list-disc pl-4 font-bold mb-1 text-red-600">
+                    {deficitData.diagnosis.map((diag: string, i: number) => (
+                      <li key={i}>{diag}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="font-bold mb-1 text-red-600">{deficitData.diagnosis}</p>
+                )
+              )}
+              {deficitData.text && <p className="text-red-900/80 mt-1">{deficitData.text}</p>}
+              {(!deficitData.text && deficitData.deficits) && (
                 <ul className="list-disc pl-4 space-y-1">
-                  {extendedDeficit.deficits.map((item: string, i: number) => (
+                  {deficitData.deficits.map((item: string, i: number) => (
                     <li key={i}>{item}</li>
                   ))}
                 </ul>
-              ) : (
-                <p>{extendedDeficit as unknown as string}</p>
               )}
-              {extendedDeficit.test && (
-                <p className="pt-2 mt-2 border-t border-red-100">
-                  <span className="font-semibold text-red-600">Test de evaluación:</span> {extendedDeficit.test}
-                </p>
+              {(!deficitData.text && !deficitData.deficits && typeof deficitData === 'string') && (
+                <p>{deficitData}</p>
               )}
             </div>
           </div>
@@ -116,12 +130,12 @@ export function CustomNode({ data, isConnectable, selected }: any) {
   if (category === 'io') {
     return (
       <div 
-        className="px-5 py-3 font-bold text-slate-700 border-2 border-slate-300 text-center text-sm md:text-base uppercase tracking-[0.2em] bg-white shadow-sm rounded-xl relative w-[180px] cursor-help hover:border-slate-400 hover:shadow-md transition-all duration-300 hover:ring-4 hover:ring-slate-200 active:scale-[0.98]"
+        className={cn("px-5 py-3 font-bold text-slate-700 border-2 border-slate-300 text-center text-sm md:text-base uppercase tracking-[0.2em] bg-white shadow-sm rounded-xl relative w-[180px] cursor-help hover:border-slate-400 hover:shadow-md transition-all duration-300 hover:ring-4 hover:ring-slate-200 active:scale-[0.98]", damagedClasses)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         {renderHandles()}
-        <span className="bg-gradient-to-r from-slate-700 to-slate-500 bg-clip-text text-transparent">{label}</span>
+        <span className={cn("bg-clip-text text-transparent bg-gradient-to-r", isDamaged ? "from-red-700 to-red-500" : "from-slate-700 to-slate-500")}>{label}</span>
         {renderTooltip()}
       </div>
     );
@@ -145,7 +159,7 @@ export function CustomNode({ data, isConnectable, selected }: any) {
 
   return (
     <div 
-      className={cn(baseClasses, categoryClasses)}
+      className={cn(baseClasses, categoryClasses, damagedClasses)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

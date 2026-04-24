@@ -78,7 +78,17 @@ export function CustomEdge({
                 <span className="font-bold text-red-600 block text-[11px] uppercase tracking-wide mb-1">Fallo Clínico</span>
                 {data.extendedDeficit && typeof data.extendedDeficit === 'object' && data.extendedDeficit !== null && 'diagnosis' in data.extendedDeficit ? (
                   <div className="text-red-500 mt-1 font-normal leading-snug text-xs space-y-1">
-                    {(data.extendedDeficit as any).diagnosis && <p className="font-bold mb-1 text-red-600">{(data.extendedDeficit as any).diagnosis}</p>}
+                    {(data.extendedDeficit as any).diagnosis && (
+                      Array.isArray((data.extendedDeficit as any).diagnosis) ? (
+                        <ul className="list-disc pl-4 font-bold mb-1 text-red-600">
+                          {(data.extendedDeficit as any).diagnosis.map((diag: string, i: number) => (
+                            <li key={i}>{diag}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="font-bold mb-1 text-red-600">{(data.extendedDeficit as any).diagnosis}</p>
+                      )
+                    )}
                     {(data.extendedDeficit as any).deficits ? (
                       <ul className="list-disc pl-4 space-y-1">
                         {(data.extendedDeficit as any).deficits.map((item: string, i: number) => (
@@ -86,7 +96,7 @@ export function CustomEdge({
                         ))}
                       </ul>
                     ) : (
-                      <p>{data.extendedDeficit as unknown as string}</p>
+                      <p>{typeof data.extendedDeficit === 'string' ? data.extendedDeficit : ''}</p>
                     )}
                     {(data.extendedDeficit as any).test && (
                       <p className="pt-2 mt-2 border-t border-red-100">
@@ -95,7 +105,7 @@ export function CustomEdge({
                     )}
                   </div>
                 ) : (
-                  <p className="text-red-500 mt-1 font-normal leading-snug">{(data.extendedDeficit || data.deficit) as string}</p>
+                  <p className="text-red-500 mt-1 font-normal leading-snug">{typeof (data.extendedDeficit || data.deficit) === 'string' ? (data.extendedDeficit || data.deficit) : ''}</p>
                 )}
               </div>
             )}

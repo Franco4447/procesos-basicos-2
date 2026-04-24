@@ -1,12 +1,136 @@
 import { useState, useEffect } from 'react';
-import { FlowDiagram } from './components/FlowDiagram';
+import { FlowDiagram, RouteDef } from './components/FlowDiagram';
 import { InfoContext } from './context/InfoContext';
-import { X, BookOpen, BrainCircuit, MousePointer2, Info, Navigation, Play } from 'lucide-react';
+import { DIAGNOSTICOS_AGRUPADOS, DiagnosisDef } from './data/diagnosticos';
+import { X, BookOpen, BrainCircuit, MousePointer2, Info, Navigation, Play, Route as RouteIcon, Map, Activity, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+
+export const GRUPOS_RUTAS = [
+  {
+    title: 'Lectura',
+    routes: [
+      {
+        id: 'lectura-lexica',
+        name: 'Ruta Léxico-semántica',
+        description: 'Permite leer palabras conocidas comprendiendo su significado.',
+        nodes: ['6', '7', '8', '5', '10', '12', '15'],
+        edges: ['e6-7', 'e7-8', 'e8-5', 'e5-10', 'e10-12', 'e12-15']
+      },
+      {
+        id: 'lectura-asemantica',
+        name: 'Ruta Léxica Asemántica',
+        description: 'Permite leer palabras regulares e irregulares conocidas evadiendo su comprensión.',
+        nodes: ['6', '7', '8', '10', '12', '15'],
+        edges: ['e6-7', 'e7-8', 'e8-10', 'e10-12', 'e12-15']
+      },
+      {
+        id: 'lectura-fonologica',
+        name: 'Ruta Subléxica (Fonológica)',
+        description: 'Permite leer pseudopalabras aplicando reglas de conversión grafema a fonema.',
+        nodes: ['6', '7', '9', '12', '15'],
+        edges: ['e6-7', 'e7-9', 'e9-12', 'e12-15']
+      }
+    ]
+  },
+  {
+    title: 'Escritura al Dictado',
+    routes: [
+      {
+        id: 'escritura-lexica',
+        name: 'Ruta Léxico-semántica',
+        description: 'Permite escribir al dictado palabras familiares comprendiendo su significado.',
+        nodes: ['1', '2', '3', '5', '11', '14', '16'],
+        edges: ['e1-2', 'e2-3', 'e3-5', 'e5-11', 'e11-14', 'e14-16']
+      },
+      {
+        id: 'escritura-fonologica',
+        name: 'Ruta Subléxica (Fonológica)',
+        description: 'Permite escribir al dictado palabras desconocidas aplicando decodificación fonema-grafema.',
+        nodes: ['1', '2', '4', '12', '13', '14', '16'],
+        edges: ['e1-2', 'e2-4', 'e4-12', 'e12-13', 'e13-14', 'e14-16']
+      }
+    ]
+  },
+  {
+    title: 'Repetición Oral',
+    routes: [
+      {
+        id: 'repeticion-lexica',
+        name: 'Ruta Léxico-semántica',
+        description: 'Repetición de palabras de forma consciente y medidada por la comprensión.',
+        nodes: ['1', '2', '3', '5', '10', '12', '15'],
+        edges: ['e1-2', 'e2-3', 'e3-5', 'e5-10', 'e10-12', 'e12-15']
+      },
+      {
+        id: 'repeticion-asemantica',
+        name: 'Ruta Léxica Asemántica',
+        description: 'Repetición de palabras conocidas velozmente, sin pensar en su significado.',
+        nodes: ['1', '2', '3', '10', '12', '15'],
+        edges: ['e1-2', 'e2-3', 'e3-10', 'e10-12', 'e12-15']
+      },
+      {
+        id: 'repeticion-perilexica',
+        name: 'Ruta Periléxica (Subléxica)',
+        description: 'Permite la repetición acústico-fonológica pasiva de palabras desconocidas o inventadas.',
+        nodes: ['1', '2', '4', '12', '15'],
+        edges: ['e1-2', 'e2-4', 'e4-12', 'e12-15']
+      }
+    ]
+  },
+  {
+    title: 'Producción Espontánea',
+    routes: [
+      {
+        id: 'denominacion-oral',
+        name: 'Denominación Oral / Habla Espontánea',
+        description: 'Producción oral a partir de ideas previas o al reconocer conceptualmente un dibujo.',
+        nodes: ['5', '10', '12', '15'],
+        edges: ['e5-10', 'e10-12', 'e12-15']
+      },
+      {
+        id: 'denominacion-escrita',
+        name: 'Denominación / Escritura Espontánea',
+        description: 'Expresión escrita espontánea desencadenada a partir de los propios conceptos y vivencias.',
+        nodes: ['5', '11', '14', '16'],
+        edges: ['e5-11', 'e11-14', 'e14-16']
+      }
+    ]
+  },
+  {
+    title: 'Copia',
+    routes: [
+      {
+        id: 'copia-lexica',
+        name: 'Ruta Léxico-semántica',
+        description: 'Mecanismo de copia de textos comprensiva y reflexiva pasando por la internalización del mensaje.',
+        nodes: ['6', '7', '8', '5', '11', '14', '16'],
+        edges: ['e6-7', 'e7-8', 'e8-5', 'e5-11', 'e11-14', 'e14-16']
+      },
+      {
+        id: 'copia-asemantica',
+        name: 'Ruta Léxica Asemántica',
+        description: 'Copia de vocablos aprendidos evitando reflexionar en sus significados (dicción caligráfica directa).',
+        nodes: ['6', '7', '8', '11', '14', '16'],
+        edges: ['e6-7', 'e7-8', 'e8-11', 'e11-14', 'e14-16']
+      },
+      {
+        id: 'copia-directa',
+        name: 'Ruta Periléxica (Copia Servil)',
+        description: 'Constituye la copia o "calco" puro de caracteres extraños que no entendemos ni conocemos visuo-gráficamente.',
+        nodes: ['6', '7', '14', '16'],
+        edges: ['e6-7', 'e7-14', 'e14-16']
+      }
+    ]
+  }
+];
 
 export default function App() {
   const [selectedInfo, setSelectedInfo] = useState<any>(null);
   const [showOnboarding, setShowOnboarding] = useState(true);
+  const [showRoutesPanel, setShowRoutesPanel] = useState(false);
+  const [showDiagnosesPanel, setShowDiagnosesPanel] = useState(false);
+  const [activeRoute, setActiveRoute] = useState<RouteDef | null>(null);
+  const [activeDiagnosis, setActiveDiagnosis] = useState<DiagnosisDef | null>(null);
 
   // When clicking 'Más información'
   const handleShowInfo = (info: any) => {
@@ -17,6 +141,7 @@ export default function App() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setSelectedInfo(null);
+        setShowRoutesPanel(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -31,20 +156,151 @@ export default function App() {
             <h1 className="text-[24px] font-semibold text-white tracking-tight">Arquitectura del Procesamiento Lingüístico</h1>
             <p className="text-[14px] text-white/80 mt-1">Entendimiento y Producción de Lenguaje Oral y Escrito</p>
           </div>
-          <button 
-            onClick={() => setShowOnboarding(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-800 text-slate-200 hover:text-white rounded-lg hover:bg-slate-700 transition-colors border border-slate-700"
-          >
-            <Info size={18} />
-            <span>Ayuda</span>
-          </button>
+          <div className="flex gap-3">
+            <button 
+              onClick={() => { setShowDiagnosesPanel(true); setShowRoutesPanel(false); }}
+              className={`flex items-center gap-2 px-4 py-2 text-slate-200 hover:text-white rounded-lg transition-colors border border-slate-700 ${showDiagnosesPanel ? 'bg-slate-700 text-white' : 'bg-slate-800 hover:bg-slate-700'}`}
+            >
+               <Activity size={18} />
+               <span>Diagnósticos</span>
+            </button>
+            <button 
+              onClick={() => { setShowRoutesPanel(true); setShowDiagnosesPanel(false); }}
+              className={`flex items-center gap-2 px-4 py-2 text-slate-200 hover:text-white rounded-lg transition-colors border border-slate-700 ${showRoutesPanel ? 'bg-slate-700 text-white' : 'bg-slate-800 hover:bg-slate-700'}`}
+            >
+               <Map size={18} />
+               <span>Rutas</span>
+            </button>
+            <button 
+              onClick={() => setShowOnboarding(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-slate-800 text-slate-200 hover:text-white rounded-lg hover:bg-slate-700 transition-colors border border-slate-700"
+            >
+              <Info size={18} />
+              <span>Ayuda</span>
+            </button>
+          </div>
         </header>
 
         <main className="flex-1 w-full h-[calc(100vh-80px)] flex relative overflow-hidden">
           {/* Main Diagram Area */}
           <div className="flex-1 relative w-full h-full">
-            <FlowDiagram />
+            <FlowDiagram activeRoute={activeRoute} activeDiagnosis={activeDiagnosis} />
           </div>
+
+          {/* Rutas Panel (Left Side) */}
+          <AnimatePresence>
+            {showRoutesPanel && (
+              <motion.div
+                initial={{ x: '-100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '-100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className="w-80 md:w-96 h-full bg-white border-r border-slate-200 shadow-2xl absolute left-0 top-0 z-[1500] flex flex-col"
+              >
+                <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                  <div className="flex items-center gap-2 text-slate-800">
+                    <RouteIcon size={20} />
+                    <h2 className="font-bold tracking-tight text-lg">Rutas de Procesamiento</h2>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setShowRoutesPanel(false);
+                      setActiveRoute(null);
+                    }}
+                    className="p-1.5 hover:bg-slate-200 text-slate-500 hover:text-slate-800 rounded-md transition-colors"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+                
+                <div className="flex-1 overflow-y-auto p-4 space-y-6">
+                  {GRUPOS_RUTAS.map((grupo) => (
+                    <div key={grupo.title}>
+                      <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">{grupo.title}</h3>
+                      <div className="space-y-2">
+                        {grupo.routes.map((route) => {
+                          const isActive = activeRoute?.id === route.id;
+                          return (
+                            <button
+                              key={route.id}
+                              onClick={() => isActive ? setActiveRoute(null) : setActiveRoute(route)}
+                              className={`w-full text-left p-3 rounded-xl border transition-all ${isActive ? 'bg-blue-50 border-blue-200 ring-1 ring-blue-500 shadow-sm' : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'}`}
+                            >
+                              <h4 className={`font-semibold text-sm ${isActive ? 'text-blue-700' : 'text-slate-700'}`}>{route.name}</h4>
+                              <p className="text-xs text-slate-500 mt-1 leading-snug">{route.description}</p>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Diagnoses Panel (Left Side) */}
+          <AnimatePresence>
+            {showDiagnosesPanel && (
+              <motion.div
+                initial={{ x: '-100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '-100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className="w-80 md:w-96 h-full bg-white border-r border-slate-200 shadow-2xl absolute left-0 top-0 z-[1500] flex flex-col"
+              >
+                <div className="p-5 border-b border-red-100 flex items-center justify-between bg-red-50">
+                  <div className="flex items-center gap-2 text-red-800">
+                    <Activity size={20} />
+                    <h2 className="font-bold tracking-tight text-lg">Diagnósticos</h2>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setShowDiagnosesPanel(false);
+                      setActiveDiagnosis(null);
+                    }}
+                    className="p-1.5 hover:bg-red-200 text-red-500 hover:text-red-800 rounded-md transition-colors"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+                
+                <div className="flex-1 overflow-y-auto p-4 space-y-6">
+                  {Object.entries(DIAGNOSTICOS_AGRUPADOS).map(([category, diagnoses]) => (
+                    <div key={category}>
+                      <h3 className="font-bold text-slate-800 border-b border-slate-200 pb-2 mb-3 text-sm">{category}</h3>
+                      <div className="space-y-2">
+                        {diagnoses.map((diag) => {
+                          const isActive = activeDiagnosis?.name === diag.name;
+                          return (
+                            <button
+                              key={diag.name}
+                              onClick={() => isActive ? setActiveDiagnosis(null) : setActiveDiagnosis(diag)}
+                              className={`w-full text-left p-3 rounded-xl border transition-all ${isActive ? 'bg-red-50 border-red-200 ring-1 ring-red-500 shadow-sm' : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'}`}
+                            >
+                              <h4 className={`font-semibold text-sm ${isActive ? 'text-red-700' : 'text-slate-700'}`}>{diag.name}</h4>
+                              {isActive && diag.description && (
+                                <div className="mt-2 text-xs text-red-900/80 leading-snug">
+                                  <p>{diag.description}</p>
+                                  {diag.list && diag.list.length > 0 && (
+                                    <ul className="list-disc pl-4 mt-2 space-y-1">
+                                      {diag.list.map((item, idx) => (
+                                        <li key={idx}>{item}</li>
+                                      ))}
+                                    </ul>
+                                  )}
+                                </div>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Onboarding Modal */}
           <AnimatePresence>
@@ -205,7 +461,9 @@ export default function App() {
                             <div className="bg-red-50/70 p-6 rounded-2xl border border-red-100 shadow-sm text-lg">
                               {selectedInfo.expandedDetails.deficit.diagnosis && (
                                 <div className="mb-4 inline-block bg-red-100 text-red-900 px-4 py-2 rounded-lg font-bold border border-red-200">
-                                  Diagnóstico Clínico: {selectedInfo.expandedDetails.deficit.diagnosis}
+                                  Diagnóstico Clínico: {Array.isArray(selectedInfo.expandedDetails.deficit.diagnosis) 
+                                    ? selectedInfo.expandedDetails.deficit.diagnosis.join(' / ') 
+                                    : selectedInfo.expandedDetails.deficit.diagnosis}
                                 </div>
                               )}
                               {selectedInfo.expandedDetails.deficit.text && (
@@ -268,7 +526,9 @@ export default function App() {
                               {typeof selectedInfo.extendedDeficit === 'object' && selectedInfo.extendedDeficit !== null ? (
                                 <div className="space-y-4">
                                   <p className="font-semibold text-xl">
-                                    Diagnóstico: {selectedInfo.extendedDeficit.diagnosis}
+                                    Diagnóstico: {Array.isArray(selectedInfo.extendedDeficit.diagnosis) 
+                                      ? selectedInfo.extendedDeficit.diagnosis.join(' / ') 
+                                      : selectedInfo.extendedDeficit.diagnosis}
                                   </p>
                                   <div>
                                     <p className="font-semibold mb-2">Déficits principales:</p>

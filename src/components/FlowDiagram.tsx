@@ -21,12 +21,12 @@ const edgeTypes = {
   custom: CustomEdge,
 };
 
-const initialNodes = [
+export const initialNodes = [
   { id: '1', type: 'custom', position: { x: 0, y: 0 }, data: { label: 'Palabra oída', category: 'io', hideHandles: true } },
   { id: '6', type: 'custom', position: { x: 1200, y: 0 }, data: { label: 'Palabra leída', category: 'io', hideHandles: true } },
   
   { id: '2', type: 'custom', position: { x: 0, y: 200 }, data: { 
-    label: 'Análisis acústico', 
+    label: 'Análisis Auditivo', 
     category: 'input-process', 
     extendedFunction: [
       'Aísla características acústicas fundamentales como la sonoridad, el punto y el modo de articulación.',
@@ -77,7 +77,7 @@ const initialNodes = [
         ]
       },
       deficit: {
-        diagnosis: 'Alexia Pura (Ceguera verbal sin agrafia)',
+        diagnosis: 'Alexia Periférica (Alexia Pura / Visual / Atencional / por Negligencia)',
         text: 'Cuando se produce un daño en este componente que priva de transmitir información visual a los módulos léxicos y semánticos, aparece la alexia pura. En este déficit, la persona se ve obligada desesperadamente a individualizar una por una cada letra visual.',
         list: [
           'Pérdida trágica del reconocimiento visual "al vuelo" o pre-masticado de una palabra entera.',
@@ -109,7 +109,7 @@ const initialNodes = [
         ]
       },
       deficit: {
-        diagnosis: 'Sordera para la forma de las palabras',
+        diagnosis: ['Sordera para la forma de las palabras', 'Agnosia Profunda (+ Conversión acústico-fonológica)'],
         text: 'La caída de las representaciones en el Léxico de entrada fomenta el síndrome denominado "ceguera léxica o sordera para la conformación de la palabra". El individuo preserva la mecánica oyente e incluso discrimina consonantes, pero tiene destrozado su diccionario acústico.',
         list: [
           'Experimenta las palabras de su propio idioma cual si estuviera en un ambiente repleto de dialectos y vocabularios extranjeros jamás escuchados.',
@@ -140,7 +140,7 @@ const initialNodes = [
         ]
       },
       deficit: {
-        diagnosis: 'Dislexia Superficial de Input',
+        diagnosis: ['Alexia de Superficie de Input', 'Alexia Profunda (+ Conversión grafema-fonema)'],
         text: 'A raíz de una pérdida en los almacenes visuales del cerebro, el paciente cae en estado de orfandad léxica para la lectura y queda sumido a utilizar la ruta "novata y escolar" puramente fonológica y silábica. Su lectura se vuelve extremadamente dependiente de la conversión fonema a grafema.',
         list: [
           'Dilemas imposibles frente a homófonos, ya que todo se reduce a un silabeo idéntico ("Vaca" resulta indistinguible de "Baca").',
@@ -172,7 +172,7 @@ const initialNodes = [
         ]
       },
       deficit: {
-        diagnosis: 'Agnosia Fonológica Auditiva',
+        diagnosis: ['Agnosia Fonológica Auditiva', 'Agnosia Profunda (+ Léxico Auditivo)'],
         text: 'Cuando el encadenamiento perilexical sufre averías, la persona que escuche vocabulario inédito está absolutamente imposibilitada a reiterarlo, obligándola a acudir a mecanismos cerebrales léxicos.',
         list: [
           'Incompetencia rotunda ante el desafío de repetir secuencias novedosas (no-palabras inventadas).',
@@ -201,7 +201,7 @@ const initialNodes = [
         ]
       },
       deficit: {
-        diagnosis: 'Dislexia Fonológica',
+        diagnosis: ['Alexia Fonológica', 'Alexia Profunda (+ Léxico Visual)'],
         text: 'El daño profundo sobre este módulo priva al sujeto de la vía fonológica. Si el paciente no puede acceder a una representación en el Léxico Visual (porque la palabra es infrecuente o desconocida), simplemente no puede pronunciarla.',
         list: [
           'Incapacidad drástica para derivar el sonido de palabras novedosas, inventadas o pseudopalabras.',
@@ -233,7 +233,7 @@ const initialNodes = [
         ]
       },
       deficit: {
-        diagnosis: 'Agnosia / Demencia Semántica',
+        diagnosis: 'Anomia Semántica / Alexia de Superficie Central',
         text: 'La desorganización a las bases enciclopédicas por desnutriciones neurológicas o afasias graves trae un déficit letal intermodal inmiscuido en todas las áreas de la comprensión, arrastrando a su paso el habla espontánea conciente y la mímica funcional lógica.',
         list: [
           'Degradación sustancial, intermodal e independiente del formato de entrada hacia el concepto u objeto genérico.',
@@ -264,7 +264,7 @@ const initialNodes = [
         ]
       },
       deficit: {
-        diagnosis: 'Anomia Pura / Afasia Anómica',
+        diagnosis: 'Anomia / Alexia de superficie de output',
         text: 'La desconexión a este eslabón despunta cuadros que imposibilitan encontrar un acceso a la etiqueta léxica. El paciente exhibe consciencia total, conoce, entiende y siente al cien por ciento lo que anhela nombrar pero le es inalcanzable neuro-vocalmente.',
         list: [
           'Agrava irremisiblemente el conocido fenómeno temporal "Lo tengo en la Punta de las Lenguas" asumiéndolo crónico.',
@@ -276,7 +276,7 @@ const initialNodes = [
     }
   } },
   { id: '11', type: 'custom', position: { x: 900, y: 800 }, data: { 
-    label: 'Léxico ortográfico', 
+    label: 'Léxico grafémico', 
     category: 'lexicon', 
     extendedFunction: [
       'Facilita dictar una estructura ortográfica automatizada, holística y exacta a la mano del individuo.',
@@ -294,7 +294,7 @@ const initialNodes = [
         ]
       },
       deficit: {
-        diagnosis: 'Agrafia Superficial o Léxica',
+        diagnosis: ['Agrafia de Superficie', 'Agrafia Profunda (+ Conversión fonema-grafema)'],
         text: 'La lesión en el LOS deja a la persona atada a las vías obligatorias de la "Conversión fonema-grafema" perdiendo así las singularidades aprendidas y deudas históricas u caprichosas con la letra formal idiomática.',
         list: [
           'Sobre-regularización constante obligada y sistemática de vocablos irregulares u ambiguos ("erbir" por "hervir").',
@@ -384,7 +384,7 @@ const initialNodes = [
         ]
       },
       deficit: {
-        diagnosis: 'Agrafia Fonológica',
+        diagnosis: ['Agrafia Fonológica', 'Agrafia Profunda (+ Léxico Grafémico)'],
         text: 'La falla o amputación en de este ensamble fonético-grafémico a nivel neural condena y aísla la pluma forzándola inyectivamente a disponer de sus repositorios de memorias intocadas. No pueden "asir", tipificar o derivar transcripción forzosa ante el dictado inexplorado insólito.',
         list: [
           'Absoluta paralización e imposibilidad fúnebre extrema ante todo estímulo inventado o pseudo-verbalización para volverse alfabético en su puño.',
@@ -418,9 +418,14 @@ const edgeStyle = { stroke: '#94A3B8', strokeWidth: 2 };
 const dashedEdgeStyle = { stroke: '#94A3B8', strokeWidth: 2, strokeDasharray: '6,4' };
 const convEdgeStyle = { stroke: '#d946ef', strokeWidth: 2.5, strokeDasharray: '6,4' };
 
-const initialEdges = [
+export const initialEdges = [
   { id: 'e1-2', source: '1', target: '2', type: 'custom', sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle },
-  { id: 'e6-7', source: '6', target: '7', type: 'custom', sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle },
+  { 
+    id: 'e6-7', source: '6', target: '7', type: 'custom', sourceHandle: 's-bottom-center', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle,
+    data: {
+      extendedDeficit: { diagnosis: 'Alexia Periférica (Alexia Pura / Visual / Atencional / por Negligencia)' }
+    }
+  },
   
   { id: 'e2-3', source: '2', target: '3', type: 'custom', sourceHandle: 's-bottom-right', targetHandle: 't-top-center', markerEnd: markerOpt, style: edgeStyle, data: { 
     extendedFunction: [
@@ -460,6 +465,7 @@ const initialEdges = [
   } },
   
   { id: 'e3-5', source: '3', target: '5', type: 'custom', sourceHandle: 's-right-middle', targetHandle: 't-top-left', markerEnd: markerOpt, style: edgeStyle, data: { 
+    extendedDeficit: { diagnosis: 'Sordera para el significado de la palabra' },
     extendedFunction: [
       'Proporciona el andamiaje asociativo primordial que hace que "reconocer la palabra oída" active instantáneamente el conocimiento conceptual ("Comprensión Auditiva").',
       'Envía eficientemente la firma de coincidencia pre-léxica al espacio interrelacionado semántico general amodal.',
@@ -467,6 +473,7 @@ const initialEdges = [
     ]
   } },
   { id: 'e8-5', source: '8', target: '5', type: 'custom', sourceHandle: 's-left-middle', targetHandle: 't-top-right', markerEnd: markerOpt, style: edgeStyle, data: { 
+    extendedDeficit: { diagnosis: 'Ceguera para el significado de la palabra' },
     extendedFunction: [
       'Sirve como el pilar fundamental que dota velozmente al lector rápido y silencioso para impregnarse del contenido abstracto del texto.',
       'Se disocia activamente sobre las cortezas de reconocimiento fonético, posibilitando evadir el letreo auditivo en voz alta acortando el análisis.',
@@ -584,7 +591,20 @@ const initialEdges = [
   },
 ];
 
-export function FlowDiagram() {
+export interface RouteDef {
+  id: string;
+  name: string;
+  description: string;
+  nodes: string[];
+  edges: string[];
+}
+
+export interface FlowDiagramProps {
+  activeRoute?: RouteDef | null;
+  activeDiagnosis?: { name: string, nodes: string[], edges: string[] } | null;
+}
+
+export function FlowDiagram({ activeRoute, activeDiagnosis }: FlowDiagramProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
@@ -598,14 +618,37 @@ export function FlowDiagram() {
   }, []);
 
   const { connectedNodes, connectedEdgesIds } = useMemo(() => {
-    if (!hoveredNode) {
+    if (activeRoute) {
+      return {
+        connectedNodes: new Set(activeRoute.nodes),
+        connectedEdgesIds: new Set(activeRoute.edges)
+      };
+    }
+
+    if (!hoveredNode && !activeDiagnosis) {
       return { connectedNodes: new Set<string>(), connectedEdgesIds: new Set<string>() };
     }
 
     const cNodes = new Set<string>();
     const cEdges = new Set<string>();
 
-    const queueForwards = [hoveredNode];
+    const initialNodesToTraverse = new Set<string>();
+
+    if (hoveredNode) {
+      initialNodesToTraverse.add(hoveredNode);
+    } else if (activeDiagnosis) {
+      activeDiagnosis.nodes.forEach(n => initialNodesToTraverse.add(n));
+      activeDiagnosis.edges.forEach(edgeId => {
+        const edge = edges.find(e => e.id === edgeId);
+        if (edge) {
+          initialNodesToTraverse.add(edge.source);
+          initialNodesToTraverse.add(edge.target);
+          cEdges.add(edge.id);
+        }
+      });
+    }
+
+    const queueForwards = Array.from(initialNodesToTraverse);
     while (queueForwards.length > 0) {
       const current = queueForwards.shift()!;
       cNodes.add(current);
@@ -625,7 +668,7 @@ export function FlowDiagram() {
       });
     }
 
-    const queueBackwards = [hoveredNode];
+    const queueBackwards = Array.from(initialNodesToTraverse);
     while (queueBackwards.length > 0) {
       const current = queueBackwards.shift()!;
       cNodes.add(current);
@@ -646,60 +689,68 @@ export function FlowDiagram() {
     }
 
     return { connectedNodes: cNodes, connectedEdgesIds: cEdges };
-  }, [hoveredNode, edges]);
+  }, [hoveredNode, edges, activeRoute, activeDiagnosis]);
 
   const dynamicNodes = useMemo(() => {
     return nodes.map((node) => {
-      if (!hoveredNode) {
+      if (!hoveredNode && !activeRoute && !activeDiagnosis) {
         return {
           ...node,
-          style: { ...node.style, opacity: 1, transition: 'opacity 0.3s ease' },
+          data: { ...node.data, isDamaged: false },
+          style: { ...(node as any).style, opacity: 1, boxShadow: 'none', transition: 'all 0.3s ease' },
         };
       }
 
       const isConnected = connectedNodes.has(node.id);
+      const isDamagedNode = activeDiagnosis && activeDiagnosis.nodes.includes(node.id);
       return {
         ...node,
+        data: { ...node.data, isDamaged: isDamagedNode },
         style: {
-          ...node.style,
+          ...(node as any).style,
           opacity: isConnected ? 1 : 0.25,
-          transition: 'opacity 0.3s ease',
+          boxShadow: 'none', // Handle shadow inside CustomNode via isDamaged
+          transition: 'all 0.3s ease',
         },
       };
     });
-  }, [nodes, hoveredNode, connectedNodes]);
+  }, [nodes, hoveredNode, activeRoute, activeDiagnosis, connectedNodes]);
 
   const dynamicEdges = useMemo(() => {
     return edges.map((edge) => {
-      // If no node is hovered, return the default edge
-      if (!hoveredNode) {
+      // If no node is hovered and no route is active, return the default edge
+      if (!hoveredNode && !activeRoute && !activeDiagnosis) {
         return {
           ...edge,
           animated: false,
-          style: {
+          style: { 
             ...edge.style,
             opacity: 1,
+            stroke: edge.style?.stroke || '#94A3B8',
             strokeWidth: edge.type === 'custom' && edge.style?.strokeWidth ? edge.style.strokeWidth : 2,
-            transition: 'opacity 0.3s ease, stroke-width 0.3s ease',
+            transition: 'all 0.3s ease',
           }
         };
       }
 
-      // If a node is hovered, highlight connected edges
+      // If a node is hovered or a route is active, highlight connected edges
       const isConnected = connectedEdgesIds.has(edge.id);
+      const isDamagedEdge = activeDiagnosis && activeDiagnosis.edges.includes(edge.id);
       return {
         ...edge,
         animated: isConnected,
         style: {
           ...edge.style,
           opacity: isConnected ? 1 : 0.15, // Fade out non-connected edges
-          strokeWidth: isConnected ? 3 : (edge.style?.strokeWidth || 2),
-          transition: 'opacity 0.3s ease, stroke-width 0.3s ease',
+          stroke: isDamagedEdge ? '#ef4444' : (edge.style?.stroke || '#94A3B8'),
+          strokeWidth: isDamagedEdge ? 4 : (isConnected ? 3 : (edge.style?.strokeWidth || 2)),
+          filter: isDamagedEdge ? 'drop-shadow(0 0 4px rgba(239, 68, 68, 0.8))' : 'none',
+          transition: 'all 0.3s ease',
         },
         zIndex: isConnected ? 1000 : 0
       };
     });
-  }, [edges, hoveredNode, connectedEdgesIds]);
+  }, [edges, hoveredNode, activeRoute, activeDiagnosis, connectedEdgesIds]);
 
   return (
     <div className="w-full h-full min-h-[90vh]">
